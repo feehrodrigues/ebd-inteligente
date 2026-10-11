@@ -32,7 +32,41 @@ export default defineConfig({
       workbox: {
         globPatterns: ["**/*.{js,css,html,svg,png,ico,woff2}"],
         navigateFallbackDenylist: [/^\/api/],
+        // ✅ Aumenta o limite de precache pra 4 MB (resolve o erro do Netlify)
+        maximumFileSizeToCacheInBytes: 4 * 1024 * 1024,
       },
     }),
   ],
+  build: {
+    chunkSizeWarningLimit: 1500,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          // React + ReactDOM em um chunk separado
+          "react-vendor": ["react", "react-dom", "react-router-dom"],
+
+          // Clerk (autenticação)
+          "clerk-vendor": ["@clerk/react"],
+
+          // Supabase
+          "supabase-vendor": ["@supabase/supabase-js"],
+
+          // Gráficos
+          "charts-vendor": ["recharts"],
+
+          // PDF
+          "pdf-vendor": ["@react-pdf/renderer"],
+
+          // Ícones (lucide)
+          "icons-vendor": ["lucide-react"],
+
+          // Datas
+          "dates-vendor": ["date-fns"],
+
+          // Estado global
+          "state-vendor": ["zustand"],
+        },
+      },
+    },
+  },
 });
