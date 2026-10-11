@@ -67,10 +67,10 @@ export function Membros() {
     }
   }
 
-  async function removerMembro(m: SalaMembro) {
-    if (!confirm(`Remover "${m.user_nome ?? m.user_email}" da sala?`)) return;
-    try {
-      await removerMembro(m.id);
+  async function removerMembroDaSala(m: SalaMembro) {
+  if (!confirm(`Remover "${m.user_nome ?? m.user_email}" da sala?`)) return;
+  try {
+    await removerMembro(m.id);
       toast.success("Membro removido");
       carregar();
     } catch (e: any) {
@@ -176,7 +176,7 @@ export function Membros() {
                     </div>
                     {ehAdmin && m.papel !== "admin" && (
                       <button
-                        onClick={() => removerMembro(m)}
+                        onClick={() => removerMembroDaSala(m)}
                         className="btn-ghost p-2 text-red-500"
                         title="Remover"
                       >

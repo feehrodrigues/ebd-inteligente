@@ -119,8 +119,8 @@ export function ComparacaoTrimestres({
                   {trend === "desceu" && <TrendingDown size={12} />}
                   {trend === "igual" && <Minus size={12} />}
                   {trend === "igual"
-                    ? "0%"
-                    : `${d > 0 ? "+" : ""}${d}%`}
+  ? "0%"
+  : `${(d ?? 0) > 0 ? "+" : ""}${d ?? 0}%`}
                 </div>
               )}
 
